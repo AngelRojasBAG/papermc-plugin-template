@@ -4,6 +4,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import groovy.json.JsonSlurper
+
 // Configure the dependencies of this gradle build script.
 buildscript {
   repositories {
@@ -143,12 +145,10 @@ task downloadServerSoftware {
         def serverJarPath = serverDirPath + "/" + paperJarName
         def serverJar = new File(serverJarPath)
         if (!serverJar.exists()) {
-            ant.get(
-                src: 'https://papermc.io/api/v2/projects/paper/versions/' +
-                paperVersion + '/builds/' + paperBuild + '/downloads/' +
-                paperJarName,
-                dest: serverJarPath
-            )
+            def url = new JsonSlurper()
+                    .parseText(new URL("https://fill.papermc.io/v3/projects/paper/versions/${paperVersion}/builds/${paperBuild}").text)
+                    .downloads["server:default"].url
+            ant.get(src: url, dest: serverJarPath)
         }
         new File(serverDirPath + '/eula.txt').write('eula=true')
     }
