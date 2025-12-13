@@ -68,3 +68,17 @@ Then, in your Minecraft game, enter the command
 
 When you are done working with the server you can stop it by typing
 <kbd>CTRL</kbd> + <kbd>C</kbd> in the terminal where the server is running.
+
+## Debugging Groovy Scripts
+
+It may be helpful to use the Groovy REPL to experiment with small snippets of Groovy code
+
+_Installation_
+```
+sdk install groovy
+```
+
+_Usage_
+```
+groovysh
+```
