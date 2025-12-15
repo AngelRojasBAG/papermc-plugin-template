@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.inventory.AnvilInventory;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -32,10 +33,12 @@ public final class AnvilInputListener implements Listener {
         if (!title.equals(AnvilInputGui.SEARCH_TITLE) && !title.equals(AnvilInputGui.PRICE_TITLE))
             return;
 
-        // Quitar costo/limitaciones del yunque (Paper puede bloquear por "Too
-        // Expensive")
+        // Quitar costo y evitar "Too Expensive"
         anvil.setRepairCost(0);
-        anvil.setMaximumRepairCost(0);
+        anvil.setMaximumRepairCost(9999); // NO usar 0, porque bloquea todo
+
+        // Forzar al cliente a mostrar costo 0
+        e.getView().setProperty(InventoryView.Property.REPAIR_COST, 0);
 
         // Forzar un resultado clickeable (aunque no haya "crafteo" real)
         ItemStack left = anvil.getItem(0);
@@ -69,7 +72,7 @@ public final class AnvilInputListener implements Listener {
             return;
         }
 
-        // Texto real escrito por el jugador (más confiable que displayName del result)
+        // Texto real escrito por el jugador
         String text = anvil.getRenameText();
         if (text == null)
             text = "";
