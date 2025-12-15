@@ -5,8 +5,18 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 ---  # Denotes the start of this YAML document. https://yaml.org/spec/1.2/spec.html#id2760395
-name: PapermcPluginTemplate
-main: dev.thehale.papermc_plugin_template.PapermcPluginTemplatePlugin
-version: 0.1.0
-api-version: 1.19
+name: GrandExchange
+version: 1.0.0
+main: cl.angel.ge.GrandExchangePlugin
+api-version: 1.21
+author: Nortarox
+description: Sistema de mercado global tipo Grand Exchange
+
+
+commands:
+  ge:
+    description: Abre el Grand Exchange
+    usage: /ge
+
+
 ... # Denotes the end of this YAML document. https://yaml.org/spec/1.2/spec.html#id2760395
